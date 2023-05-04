@@ -1,12 +1,11 @@
 <template>
   <div class="header-top">
-   Boolflix
+    <img src="../assets/img/logo-boolflix.png" alt="Boolflix Logo" />
   </div>
   <header class="app-header">
-    <h1>boolflix</h1>
+    <h4>Watch your favourite Show!</h4>
   </header>
 </template>
-
 <script>
 export default {
   name: "Header",
@@ -33,4 +32,14 @@ export default {
   font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.header-top img {
+  /* Personalizza le dimensioni del logo */
+  width: 150px;
+  height: auto;
+}
 </style>
+
+
+
+
