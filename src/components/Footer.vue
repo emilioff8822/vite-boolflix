@@ -11,9 +11,11 @@ export default {
 </script>
 
 <template>
-  <h2 class="text-center my-5">Sono state caricati {{ store.resultArray.length }} film/serietv</h2>
+  <h2 class="text-center my-5">Sono stati caricati {{ store.resultArray.length }} Film/SerieTv</h2>
 </template>
 
 <style>
-
+h2 {
+  color: rgb(162, 161, 161);
+}
 </style>
