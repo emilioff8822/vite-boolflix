@@ -27,19 +27,32 @@ export default {
   methods: {
     getApi(searchText = "", type = "all") {
     const apiKey = "189665c00565925740541aecbd96aade";
-    let url = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${searchText}&language=it-IT`;
 
-    if (type !== "all") {
-      if (type === "movie") {
-        url = url.replace("multi", "movie");
-      } else if (type === "tv") {
-        url = url.replace("multi", "tv");
+    // controllo per verificare se sia searchText che type sono vuoti
+    if (searchText === "" && type === "all") {
+      
+      // Se entrambi sono vuoti, carico la pagina di default con popular
+      let url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=it-IT&page=1`;
+
+      axios.get(url).then((result) => {
+        store.resultArray = result.data.results;
+      });
+    } else {
+      // Altrimenti, eseguo la ricerca come prima
+      let url = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${searchText}&language=it-IT`;
+
+      if (type !== "all") {
+        if (type === "movie") {
+          url = url.replace("multi", "movie");
+        } else if (type === "tv") {
+          url = url.replace("multi", "tv");
+        }
       }
-    }
 
-    axios.get(url).then((result) => {
-      store.resultArray = result.data.results;
-    });
+      axios.get(url).then((result) => {
+        store.resultArray = result.data.results;
+      });
+    }
     },
     updateSearch(searchText) {
       this.currentSearch = searchText;
