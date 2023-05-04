@@ -1,8 +1,10 @@
 <template>
   <div class="search-container">
+    
     <input type="text" v-model="searchText" placeholder="Cerca" />
+    
     <select v-model="selectedType">
-      <option value="all">Seleziona un tipo</option>
+      <option value="all">All</option>
       <option value="movie">Film</option>
       <option value="tv">Serie TV</option>
     </select>

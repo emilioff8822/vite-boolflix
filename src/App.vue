@@ -30,7 +30,6 @@ export default {
     let url = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${searchText}&language=it-IT`;
 
     if (type !== "all") {
-      url += `&with_genres=${type}`;
       if (type === "movie") {
         url = url.replace("multi", "movie");
       } else if (type === "tv") {
@@ -46,10 +45,10 @@ export default {
       this.currentSearch = searchText;
       this.getApi(searchText, this.currentType);
     },
-    updateType(type) {
-      this.currentType = type;
-      this.getApi(this.currentSearch, type);
-    },
+    updateType(selectedType) {
+    this.currentType = selectedType;
+    this.getApi(this.currentSearch, selectedType);
+  },
     resetSearch() {
       this.currentSearch = "";
       this.currentType = "all";
@@ -81,7 +80,7 @@ export default {
 }
 
 .container {
-  background-color: white;
+  background-color: black;
   padding: 0;
   box-sizing: border-box;
   min-height: 100%;

@@ -24,8 +24,9 @@ export default {
 .pg-card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; 
+  gap: 40px; 
   justify-content: center; 
+  margin-top: 60px;
 }
 
 .card-wrapper {
