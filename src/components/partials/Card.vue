@@ -6,7 +6,10 @@
       <div class="card-info">
         <h3>{{ card.title || card.name }}</h3>
         <p>Titolo originale film: {{ card.original_title || card.original_name }}</p>
-        <p>Lingua: {{ card.original_language }}</p>
+        <p> Lingua:
+          <img v-if="flagImage" :src="flagImage" alt="Bandiera lingua" class="flag" />
+          <span v-else>Lingua: {{ card.original_language }}</span>
+        </p>
         <div class="rating"> Voto:
           <font-awesome-icon v-for="n in getStars" :key="n" icon="star"  class="star" />
         </div>
@@ -43,6 +46,15 @@ export default {
     getStars() {
       return Math.ceil(this.card.vote_average / 2);
     },
+    flagImage() {
+      if (this.card.original_language === 'en') {
+        return '../../../src/assets/img/en.png';
+      } else if (this.card.original_language === 'it') {
+        return '../../../src/assets/img/it.png';
+      } else {
+        return null;
+      }
+    }
   },
   components: {
     FontAwesomeIcon,
@@ -68,7 +80,6 @@ export default {
 }
 
 .card img {
-  width: 100%;
   display: block;
 }
 
@@ -86,7 +97,7 @@ export default {
   color: white;
   padding: 10px;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
@@ -107,5 +118,11 @@ export default {
 .star {
   color: gold;
 }
-</style>
 
+.flag {
+  width: 40px;
+  margin-top: 10px;
+  height: auto;
+  margin-left: 4px;
+}
+</style>
