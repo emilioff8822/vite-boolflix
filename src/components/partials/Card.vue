@@ -1,19 +1,27 @@
-<!-- Card.vue -->
 <template>
   <div class="card-wrapper">
     <div class="card">
-      <img :src="posterUrl" alt="Copertina" />
+      <img v-if="posterUrl" :src="posterUrl" alt="Copertina" />
+      <img v-else src="../../assets/img/nondisp.jpg" alt="Immagine non disponibile" />
       <div class="card-info">
         <h3>{{ card.title || card.name }}</h3>
         <p>Titolo originale film: {{ card.original_title || card.original_name }}</p>
         <p>Lingua: {{ card.original_language }}</p>
-        <p>Voto: {{ card.vote_average }}/10</p>
+        <div class="rating"> Voto:
+          <font-awesome-icon v-for="n in getStars" :key="n" icon="star"  class="star" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faStar);
+
 export default {
   name: "Card",
   props: {
@@ -24,15 +32,23 @@ export default {
   },
   computed: {
     posterUrl() {
-      const baseUrl = "https://image.tmdb.org/t/p/";
-      const imageSize = "w342";
-      return baseUrl + imageSize + this.card.poster_path;
+      if (this.card.poster_path) {
+        const baseUrl = "https://image.tmdb.org/t/p/";
+        const imageSize = "w342";
+        return baseUrl + imageSize + this.card.poster_path;
+      } else {
+        return null;
+      }
     },
+    getStars() {
+      return Math.ceil(this.card.vote_average / 2);
+    },
+  },
+  components: {
+    FontAwesomeIcon,
   },
 };
 </script>
-
-
 
 
 
@@ -70,7 +86,7 @@ export default {
   color: white;
   padding: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
   opacity: 0;
@@ -81,4 +97,15 @@ export default {
   opacity: 1.0;
 }
 
+.rating {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 10px;
+}
+
+.star {
+  color: gold;
+}
 </style>
+

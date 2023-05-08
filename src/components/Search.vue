@@ -28,7 +28,7 @@ export default {
     },
     reset() {
       this.searchText = "";
-      this.selectedType = "";
+      this.selectedType = "all";
       this.emitSearch();
       this.$emit("reset-search");
     },

@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <h2 class="text-center my-5">Sono stati caricati {{ store.resultArray.length }} Film/SerieTv</h2>
+  <h2 class="text-center my-5">Sono stati caricati {{ store.resultArray.length }} Risultati</h2>
 </template>
 
 <style>
